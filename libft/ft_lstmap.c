@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bruda-si <bruda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 12:01:44 by bruda-si          #+#    #+#             */
-/*   Updated: 2023/10/23 15:56:13 by bruda-si         ###   ########.fr       */
+/*   Created: 2023/10/21 18:10:28 by bruda-si          #+#    #+#             */
+/*   Updated: 2023/10/23 16:49:25 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del )(void *))
 {
-	size_t	i;
-	size_t	j;
+	t_list	*new_node;
+	t_list	*new_list;
 
-	i = 0;
-	j = 0;
-	if (little[i] == '\0')
+	if (!lst)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		return ((char *) big);
-	}
-	while (big[i] != '\0' && i < len)
-	{
-		while (big[i + j] == little[j] && i + j < len)
+		new_node = (t_list *)malloc(sizeof(t_list));
+		if (!new_node)
 		{
-			if (little[j + 1] == '\0')
-			{
-				return ((char *) &big[i]);
-			}
-			j++;
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		j = 0;
-		i++;
+		new_node->content = f(lst->content);
+		new_node->next = NULL;
+		ft_lstadd_back(&new_list, new_node);
+		lst = lst->next;
 	}
-	return (0);
+	return (new_list);
 }

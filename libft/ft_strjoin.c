@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bruda-si <bruda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 12:01:44 by bruda-si          #+#    #+#             */
-/*   Updated: 2023/10/23 15:56:13 by bruda-si         ###   ########.fr       */
+/*   Created: 2023/10/14 15:39:33 by bruda-si          #+#    #+#             */
+/*   Updated: 2023/10/23 16:12:04 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	j;
+	int			i_general;
+	int			i;
+	char		*newstr;
 
+	if (!s1 || !s2)
+		return (NULL);
+	newstr = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!newstr)
+		return (NULL);
+	i_general = 0;
 	i = 0;
-	j = 0;
-	if (little[i] == '\0')
+	while (s1[i_general] != '\0')
 	{
-		return ((char *) big);
+		newstr[i_general] = s1[i_general];
+		i_general++;
 	}
-	while (big[i] != '\0' && i < len)
+	while (s2[i] != '\0')
 	{
-		while (big[i + j] == little[j] && i + j < len)
-		{
-			if (little[j + 1] == '\0')
-			{
-				return ((char *) &big[i]);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
+		newstr[i_general] = s2[i++];
+		i_general++;
 	}
-	return (0);
+	newstr[i_general] = '\0';
+	return (newstr);
 }
