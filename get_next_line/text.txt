@@ -1,8 +1,0 @@
-A equipe de suporte precisa saber que
-o último pull request desse SCRUM
-superou o desempenho de compilação
-multi-plataforma de forma asincrona.
-Explica pro Product Onwer que a otimização
-de performance da renderização do DOM
-superou o desempenho do carregamento de
-JSON delimitado por linhas.
